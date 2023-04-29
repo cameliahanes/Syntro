@@ -24,7 +24,7 @@
 
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link"  href="">Logout</a>
+                    <a class="nav-link"  href="{% url 'logout' %}">Logout</a>
                 </li>
             {% else %}
               <li class="nav-item">
@@ -40,14 +40,6 @@
     <div class="container">
         {% if messages %}
             {% for message in messages %}
-{#                <div class="alert alert-warning alert-dismissible" role="alert">#}
-{#                    <button type="button" class="close" data-dismiss="alert">#}
-{#                        <small><sup>x</sup></small>#}
-{#                        Close#}
-{#                    </button>#}
-{#                    {{ message }}#}
-{#                </div>#}
-
                 <div class="alert alert-warning alert-dismissible" role="alert">
                   {{ message }}
                   <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
