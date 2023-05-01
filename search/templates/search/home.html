@@ -15,14 +15,7 @@
         <input name="search" type="" class="form-control" id="" placeholder="Your question here.">
         </div>
         <button type="submit" class="btn btn-success btn-lg mb-2">Search</button>
-   </form>
-        <br/>
-    {% for x in book %}
-    <h3> <a href="{{ x.get_url }}">{{x.book_name}}</a></h3>
-    <p class="lead">by {{x.author_name}}</p>
-      <p class="lead">${{x.price}}</p>
-     <hr>
-    {% endfor %}
+    </form>
 </div>
 </div>
 
