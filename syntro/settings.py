@@ -16,6 +16,8 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Temporary fix to a problem I created.
+SECURE_SSL_REDIRECT = False
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -140,3 +142,6 @@ LOGGING = {
         "level": "WARNING",
     },
 }
+
+# For projects.
+LANGCHAIN_INDEX = None

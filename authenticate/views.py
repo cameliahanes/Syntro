@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def home(request):
-    logger.warning("!!! Entered 'home'.")
     return render(request, 'authenticate/home.html', {})
 
 
