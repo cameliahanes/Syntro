@@ -14,7 +14,7 @@ class SearchConfig(AppConfig):
         import pathlib
         from langchain.document_loaders import PyPDFDirectoryLoader
         from langchain.indexes import VectorstoreIndexCreator
-        from .papers_paths import PATHS
+        # from .papers_paths import PATHS
         from .secret_key import API_KEY
         from .models import ResearchPaper
 
@@ -23,20 +23,22 @@ class SearchConfig(AppConfig):
 
         all_papers = list()
         loaders = list()
-        for path in PATHS:
-            logger.warning('~~~ Processing one dir path: ' + path)
-            loaders.append(PyPDFDirectoryLoader(path))
-
-            pathlib_path = pathlib.Path(path)
-            all_papers.extend(pathlib_path.iterdir())
-
-            for one_paper_path in all_papers:
-                paper_object = ResearchPaper(paper_id=paper_incremental_id, absolute_path=one_paper_path)
-                paper_object.save()
-                paper_incremental_id += 1
-
-        logger.warning("!!! All paperssss: " + str(all_papers))
-        index = VectorstoreIndexCreator().from_loaders(loaders)
-        logger.warning('!!! All papers added. Paths: ' + str(all_papers))
-        settings.LANGCHAIN_INDEX = index
-        logger.warning('Initialized langchain index: ' + str(settings.LANGCHAIN_INDEX))
+        logger.warning("!!! Path to all files: " + os.path.abspath('search/papers'))
+        # path_all_files = [os.path.abspath('search/papers')]
+        # for path in path_all_files:
+        #     logger.warning('~~~ Processing one dir path: ' + path)
+        #     loaders.append(PyPDFDirectoryLoader(path))
+        #
+        #     pathlib_path = pathlib.Path(path)
+        #     all_papers.extend(pathlib_path.iterdir())
+        #
+        #     for one_paper_path in all_papers:
+        #         paper_object = ResearchPaper(paper_id=paper_incremental_id, absolute_path=one_paper_path)
+        #         paper_object.save()
+        #         paper_incremental_id += 1
+        #
+        # logger.warning("!!! All paperssss: " + str(all_papers))
+        # index = VectorstoreIndexCreator().from_loaders(loaders)
+        # logger.warning('!!! All papers added. Paths: ' + str(all_papers))
+        # settings.LANGCHAIN_INDEX = index
+        # logger.warning('Initialized langchain index: ' + str(settings.LANGCHAIN_INDEX))

@@ -19,7 +19,10 @@ def find_paper_in_db(paper_path: str):
     return None
 
 def search(request):
+    current_user = request.user
+    logger.warning('Current user: ' + str(current_user))
     question = request.GET.get('search')
+
     if question is None:
         return render(request, 'search/home.html', {'query': question})
     os.environ["OPENAI_API_KEY"] = SECRET_API_KEY
@@ -57,6 +60,16 @@ def search(request):
         if PATHS[0] not in source_path:
             source_path = PATHS[0] + '/' + source_path
         logger.info('New source path: ' + source_path)
+
+    # Log username, question, answer, references.
+
+    # scopes = ['https://www.googleapis.com/auth/spreadsheets']
+    # spreadsheet_id = config('SPREADSHEET_ID', default='1AFNyUKcqgwO-CCXRubcIALOC74yfV716Q5q57Ojjicc')
+    # service_account_file = 'core/djangoexcel.json'
+    # creds = None
+    # creds = service_account.Credentials.from_service_account_file(service_account_file, scopes=scopes)
+    # service = build('sheets', 'v4', credentials=creds)
+    # sheet = service.spreadsheets()
 
     return render(request, 'search/home.html', {'question': question,
                                                 'answer': str(llm_answer['answer']),

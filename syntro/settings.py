@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authenticate',
     'search',
+    # 'gdstorage',
+    'gsheets',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +147,7 @@ LOGGING = {
 
 # For projects.
 LANGCHAIN_INDEX = None
+
+# configuration for google Drive.
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = '<path to your json private key file>'
+GOOGLE_DRIVE_STORAGE_MEDIA_ROOT = '<base google drive path for file uploads>' # OPTIONAL
