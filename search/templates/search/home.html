@@ -2,20 +2,38 @@
 
 {% block content %}
 
-
 <!-- Container for the search bar. -->
 <div class="container">
 <div>
     <br/>
-    <form action="{% url 'search' %}" class="form-inline" method="get">
-       <div class="form-group mb-8">
-            <h2>{% if type %}{{ type.name }}{% else %} Ask Syntro.ai below {% endif %}</h2>
-       </div>
-       <div class="form-group mx-sm-3 mb-2">
-        <input name="search" type="" class="form-control" id="" placeholder="Your question here.">
-        </div>
-        <button type="submit" class="btn btn-success btn-lg mb-2">Search</button>
-    </form>
+    {% if user.is_authenticated %}
+        <form action="{% url 'search' %}" class="form-inline" method="get">
+           <div class="form-group mb-8">
+                <h2>{% if type %}{{ type.name }}{% else %} Ask Syntro.ai below {% endif %}</h2>
+           </div>
+           <div class="form-group mx-sm-3 mb-2">
+            <input name="search" type="" class="form-control" id="" placeholder="Your question here.">
+            </div>
+            <button type="submit" class="btn btn-success btn-lg mb-2">Search</button>
+        </form>
+
+        {% if answer %}
+            <h3>{{ question }}</h3>
+            <h3>Answer</h3>
+            <p>{{ answer }}</p>
+            <h3>Resources</h3>
+            {% for source in sources_objects %}
+                <p><a href="{% url 'redirect' source.paper_id %}">{{ source.absolute_path }}</a></p>
+            {% endfor %}
+        {% else %}
+            {% if question %}
+                <p>Could not get an answer for question: {{ question }}</p>
+            {% endif %}
+        {% endif %}
+    {% else %}
+        <h3>You are not logged in. Please log in to unlock chatting with Syntro.ai.</h3>
+    {% endif %}
+
 </div>
 </div>
 
